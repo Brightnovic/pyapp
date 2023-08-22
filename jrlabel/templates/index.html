@@ -1,0 +1,58 @@
+
+{% extends "layout.html" %}
+{% block content %}
+ 
+ 
+    <section class="banner full">
+        <article>
+            <img src=" " alt="" />
+            <div class="inner">
+                <header>
+                    <p>     </p>
+                    <h2>   </h2>
+                </header>
+            </div>
+          
+        </article>
+        <article>
+            
+            
+            <img src="{{url_for('static', filename='slide02.jpg')}}" alt="" />
+            <div class="inner">
+                <header>
+                    <p>Lorem ipsum dolor sit amet nullam feugiat</p>
+                    <h2>Magna</h2>
+                </header>
+            </div>
+        </article>
+        <article>
+            <img src="{{url_for('static', filename='slide03.jpg')}}"  alt="" />
+            <div class="inner">
+                <header>
+                    <p>Sed cursus aliuam veroeros lorem ipsum nullam</p>
+                    <h2>Tempus</h2>
+                </header>
+            </div>
+        </article>
+        <article>
+            <img src="{{url_for('static', filename='slide04.jpg')}}"  alt="" />
+            <div class="inner">
+                <header>
+                    <p>Adipiscing lorem ipsum feugiat sed phasellus consequat</p>
+                    <h2>Etiam</h2>
+                </header>
+            </div>
+        </article>
+        <article>
+            <img src="images/slide05.jpg"  alt="" />
+            <div class="inner">
+                <header>
+                    <p>Ipsum dolor sed magna veroeros lorem ipsum</p>
+                    <h2>Adipiscing</h2>
+                </header>
+            </div>
+        </article>
+    </section>
+
+    
+{% endblock content %}

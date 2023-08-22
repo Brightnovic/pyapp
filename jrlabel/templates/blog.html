@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+
+ 
+  
+  
+ <section id=" " class="container" >
+ 
+  
+    <div class="  d-flex justify-content-evenly    flex-lg-wrap flex-sm-wrap mx-auto  ">
+        {% for posts in post %}
+    
+
+
+        <div class="image-container blogw">
+          
+                <p class="text-white">
+                    <img class="rounded-circle account-imgblog" src="{{admin}}">
+                    Posted by   <a href="{{ url_for('account') }}"> {{ current_user.username }}   </a>
+                    
+                </p>
+           
+         <div class="image fit">
+            <img src="{{ url_for('static', filename='profile_pics/' + posts.image_file) }}" alt="" />
+           {# <img src="{{url_for('static', filename='slide04.jpg')}}"  alt="" />#}
+         </div>
+         <div class="overlay">
+             <h1> <a href="{{url_for('post', post_id=posts.id)}}">{{ posts.title }}</a> </h1>
+             
+            {# <p>  {{ posts.content }}</p>#}
+             <p><i class="ri-time-line gold">{{posts.date_posted.strftime('%Y-%m-%d')}}</i></p>
+         </div>
+        </div>
+        {% endfor %}
+ 
+ 
+
+
+           
+    </div>
+</section>
+
+
+{% endblock content %}
+		 
+ 

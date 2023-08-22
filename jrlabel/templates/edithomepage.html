@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+ 
+   <div class="text-center text-info display-4"> first row</div>
+<form method="POST" >
+     
+       <div> {{ form.img_file.label }}</div> 
+       <div> {{ form.img_file }}</div>  
+       <div> {{ form.p_text.label }}</div>  
+       <div class="form-control form-control-lg"> {{ form.p_text }}</div> 
+       <div> {{ form.h2_text.label }}</div>  
+       <div class="form-control form-control-lg"> {{ form.h2_text }}</div> 
+    <button type="submit">Save Changes</button>
+</form>
+
+ 
+
+ 
+
+
+
+{% endblock content %}
+		 

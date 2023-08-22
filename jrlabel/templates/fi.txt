@@ -1,0 +1,102 @@
+<div class="image-container">
+    <div class="image fit">
+        <a href="#"><img src="{{ url_for('static', filename='pic03.jpg') }}" alt="" /></a>
+    </div>
+    <div class="overlay">
+        <h1>rema drops another song</h1>
+        <p>time</p>
+    </div>
+</div>
+
+
+
+
+<div class="image-container">
+    <div class="image fit">
+       
+    </div>
+    <div class="overlay">
+        <h1>rema drops another song</h1>
+        <p>time</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<section id="three" class="wrapper style2">
+ 
+ 
+    <div>
+        {% for posts in post %}
+    
+
+
+        <div class="image-container">
+         <div class="image fit">
+             <a href="#"><img src="{{ url_for('static', filename='pic01.jpg') }}" alt="" /></a>
+         </div>
+         <div class="overlay">
+             <h1>{{ posts.title }}</h1>
+             <p>Posted by {{ posts.author.username }}  </p>
+             <p>  {{ posts.content }}</p>
+         </div>
+        </div>
+        {% endfor %}
+        
+
+
+
+           
+    </div>
+</section>
+
+
+
+
+important !
+{% extends "layout.html" %}
+{% block content %}
+
+ 
+  
+  
+ <section id=" " >
+ 
+  
+    <div class="     d-flex justify-content-evenly    flex-lg-wrap flex-sm-wrap mx-auto  ">
+        {% for posts in post %}
+    
+
+
+        <div class="image-container blogw">
+         <div class="image fit">
+            <a href="#"><img src="{{images}}" alt="" /></a>
+   
+         </div>
+         <div class="overlay">
+             <h1>{{ posts.title }}</h1>
+             <p>Posted by {{ posts.author.username }}  </p>
+             <p>  {{ posts.content }}</p>
+         </div>
+        </div>
+        {% endfor %}
+ 
+ 
+
+
+           
+    </div>
+</section>
+
+
+{% endblock content %}
+		 
+
+
+
+{{url_for('static', filename='slide01.jpg')}}
