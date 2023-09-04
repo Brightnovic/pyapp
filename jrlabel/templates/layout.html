@@ -2,68 +2,87 @@
 
 <html>
 	<head>
-		<title>Home Page</title>
+		<title>{{title}}</title>
 		<meta charset="utf-8" />
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
 		 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		  
+		<link rel="shortcut icon" href="{{url_for('static', filename='profile_pics/icon.png')}}" type="image/x-icon">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='first.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='cond.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome.min.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='animations.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='boxicons.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='boxicons.min.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='transformations.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome.svg') }}" />
-       
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/first.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}" />
+        
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/cond.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/boxicons.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/boxicons.min.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/transformations.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.svg') }}" />
+		 
 		<title>{{title}}</title>
 	</head>
-	<body class=="toptop">
-
-		<!-- Header -->
-			<header id="header" class="alt">
-				<div class="logo"><a href="{{ url_for('home')  }}">JR<span>Stand</span></a></div>
-				<a href="#menu"><i class="ri-list-check gold"></i>menu</a>
-			</header>
-
-		<!-- Nav -->
-			<nav id="menu">
-				  {% if current_user.is_authenticated %}
-				  <ul class="links">
-					<li><a href="{{ url_for('home') }}">Home</a></li>
-					<li><a href="{{ url_for('blog') }}">Blog</a></li>
-					<li><a href="{{ url_for('service') }}">Our Services</a></li>
-					<li><a href="{{ url_for('contact') }}">Contact</a></li>
-					 
-				 
-					<li><a href="{{ url_for('about') }}">About Us</a></li>
-					<li><a href="{{ url_for('register') }}">Register</a></li>
-					<li><a href="{{ url_for('blogpost') }}">blog post</a></li>
-					<li><a href="{{ url_for('edithomepage') }}">edit homepage</a></li>
-					<li><a href="{{ url_for('logout') }}">logout</a></li>
-					<li><a href="{{ url_for('account') }}">account</a></li>
-					<li><a href="{{ url_for('Careers') }}">Careers </a></li>
-				</ul>
-              {% else %}
-			  <ul class="links">
-				<li><a href="{{ url_for('home') }}">Home</a></li>
-				<li><a href="{{ url_for('blog') }}">Blog</a></li>
-				<li><a href="{{ url_for('service') }}">Our Services</a></li>
-				<li><a href="{{ url_for('contact') }}">Contact</a></li>
-				<li><a href="{{ url_for('login') }}">Login</a></li>
-				<li><a href="{{ url_for('about') }}">About Us</a></li>
-				<li><a href="{{ url_for('Careers') }}">Careers </a></li>
-				 
-			</ul>
-             {% endif %}
+	<body class==" ">
+		 
+	
+           
 				
 				
-			</nav>
+		
+<header class="headernav">
+	<a href="#" class="logo">JR stand</a>
+	<input type="checkbox"  id="checknav">
+	<label for="checknav" class="iconsnav">
+	<i class='bx bx-menu' id="menu-icon"></i>
+	<i class='bx bx-x' id="close-icon"></i>
+	</label>
+	<nav class="navbarnav">
+		{% if current_user.is_authenticated %}
+ 
+	<a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('blog') }}">Blog</a>
+    <a href="{{ url_for('service') }}">Our Services</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
 
 
+    <a href="{{ url_for('about') }}">About Us</a>
+    <a href="{{ url_for('register') }}">Register</a>
+    <a href="{{ url_for('blogpost') }}">blog post</a></li>
+    
+    <a href="{{ url_for('logout') }}">logout</a>
+    <a href="{{ url_for('account') }}">account</a>
+    <a href="{{ url_for('Careers') }}">Careers </a>
+
+
+
+	{% set alerts = get_flashed_messages(True) %}
+
+{% for category, message in alerts %}
+    <h1 class="{{ category}}">{{ message }}</h1>
+{% endfor %}
+    
+    {% else %}
+    
+    <a href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('blog') }}">Blog</a>
+    <a href="{{ url_for('service') }}">Our Services</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+    <a href="{{ url_for('login') }}">Login</a>
+    <a href="{{ url_for('about') }}">About Us</a>
+    <a href="{{ url_for('Careers') }}">Careers </a>
+
+ 
+{% endif %}
+		
+	</nav>
+</header>
+
+
+ 
 
 
 
@@ -76,28 +95,30 @@
 
             		<!-- Footer -->
 			<footer id="footer">
-				<div class="container">
+				<div class="container mt-5">
 					<ul class="icons">
-						<li><a href="#" class=" "> <i class="ri-twitter-fill gold"></i></a></li>
-						<li><a href="#" class=" "><i class="ri-facebook-circle-fill gold"></i></a></li>
-						<li><a href="#" class=" "><i class="ri-instagram-line gold"></i> </a></li>
-						<li><a href="#" class=" "><i class="ri-whatsapp-fill gold"></i> </a></li>
+		 
+						<li><a href="https://www.facebook.com/profile.php?id=100092431778590&mibextid=LQQJ4d" class=" "><i class="ri-facebook-circle-fill gold"></i></a></li>
+						<li><a href="https://www.instagram.com/invites/contact/?i=131sbmga4n723&utm_content=r7zxvlh" class=" "><i class="ri-instagram-line gold"></i> </a></li>
+						<li><a href="https://wa.me/+2347067119718" class=" "><i class="ri-whatsapp-fill gold"></i> </a></li>
 					  </ul>
-					  
+					  <div class="copyright">
+						contact Programmers <a href="https://wa.me/+2348076627288">via Whatsapp</a>.
+				   </div>
+				   <div class="text-center"><li><a href="https://wa.me/+2348076627288" class=" "><i class="ri-whatsapp-fill gold"></i> </a></li></div>
+			
 				</div>
+				
+		
 			</footer>
 
-		<div class="copyright">
-			 contact Programmers <a href=" #">via Whatsapp</a>.
-		</div>
-		<div class="text-center"><li><a href="https://wa.me/+2348076627288" class=" "><i class="ri-whatsapp-fill gold"></i> </a></li></div>
-
-		<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
-		<script src="{{ url_for('static', filename='jquery.scrollex.min.js') }}"></script>
-		<script src="{{ url_for('static', filename='skel.min.js') }}"></script>
-		<script src="{{ url_for('static', filename='util.js') }}"></script>
-		<script src="{{ url_for('static', filename='main.js') }}"></script>
-		<script src="{{ url_for('static', filename='jsjs.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/skel.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/util.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jsjs.js') }}"></script>
+		 
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 	</body>

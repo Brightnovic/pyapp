@@ -5,41 +5,52 @@
   
   
  <section id=" " class="container" >
- 
+      
   
-    <div class="  d-flex justify-content-evenly    flex-lg-wrap flex-sm-wrap mx-auto  ">
-        {% for posts in post %}
+    <div class="  row mx-auto  ">
+        {% for posts in post.items %}
     
 
 
-        <div class="image-container blogw">
+        <div class="image-container blogw col-lg-6 col-sm-12 col-md-9  overflow-hidden">
           
                 <p class="text-white">
-                    <img class="rounded-circle account-imgblog" src="{{admin}}">
-                    Posted by   <a href="{{ url_for('account') }}"> {{ current_user.username }}   </a>
+                    
                     
                 </p>
            
          <div class="image fit">
-            <img src="{{ url_for('static', filename='profile_pics/' + posts.image_file) }}" alt="" />
-           {# <img src="{{url_for('static', filename='slide04.jpg')}}"  alt="" />#}
+            <img src="{{ url_for('static', filename='profile_pics/' + posts.image_file_blog) }}" alt="" />
+           
          </div>
          <div class="overlay">
-             <h1> <a href="{{url_for('post', post_id=posts.id)}}">{{ posts.title }}</a> </h1>
+             <h1 class="text-control"> <a href="{{url_for('post', post_id=posts.id)}}">  {{ posts.title }}</a> </h1>
+             <p class="text-control">{{posts.content}}</p>
              
-            {# <p>  {{ posts.content }}</p>#}
-             <p><i class="ri-time-line gold">{{posts.date_posted.strftime('%Y-%m-%d')}}</i></p>
+            
          </div>
         </div>
         {% endfor %}
- 
+
  
 
 
            
     </div>
 </section>
-
+<div class="container flex justify-content-center">
+    {% for page_num in post.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+      {% if post.page == page_num %}
+        <a class="btn btn-info mb-4" href="{{ url_for('blog', page=page_num) }}">{{ page_num }}</a>
+      {% else %}
+        <a class="btn btn-outline-info mb-4" href="{{ url_for('blog', page=page_num) }}">{{ page_num }}</a>
+      {% endif %}
+    {% else %}
+      ...
+    {% endif %}
+  {% endfor %}
+</div>
 
 {% endblock content %}
 		 

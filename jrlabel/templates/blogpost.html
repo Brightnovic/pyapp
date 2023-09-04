@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="content-section">
-    <form method="POST" action="" enctype="multipart/form-data">
+
+<section class="showshow mt-5  d-flex flexflex">
+
+<div class="content-section  mt-5  w-50">
+    <h1 class="text-center text-primary h1">please use laptop to view here</h1>
+    <form method="POST" action="" enctype="multipart/form-data" class="showshow">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">{{ legend }}</legend>
@@ -18,6 +22,20 @@
                     {% endif %}
                 </div>
             </div>
+            <div class="form-group bg-dark">
+                {{ form.text.label(class="form-control-label") }}
+                <div class="input-group">
+                    {{ form.text(class="form-control form-control-lg", placeholder="Enter text") }}
+                    {% if form.text.errors %}
+                        <div class="text-danger">
+                            {% for error in form.text.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+             
             <div class="form-group">
                 {{ form.content.label(class="form-control-label") }}
                 <div class="input-group">
@@ -32,12 +50,12 @@
                 </div>
             </div>
             <div class="form-group">
-                {{ form.image_file.label(class="form-control-label") }}
+                {{ form.image_file_blog.label(class="form-control-label") }}
                 <div class="input-group">
-                    {{ form.image_file(class="form-control form-control-lg") }}
-                    {% if form.image_file.errors %}
+                    {{ form.image_file_blog(class="form-control form-control-lg") }}
+                    {% if form.image_file_blog.errors %}
                         <div class=" text-danger">
-                            {% for error in form.image_file.errors %}
+                            {% for error in form.image_file_blog.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
@@ -50,4 +68,5 @@
         </div>
     </form>
 </div>
+</section>
 {% endblock content %}

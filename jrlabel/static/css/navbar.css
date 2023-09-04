@@ -1,0 +1,134 @@
+.headernav {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    padding: 1.3rem 10% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    z-index: 1000 !important;
+    background-color: transparent;
+}
+
+.headernav::before {
+    content: '' !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background-color: rgba(0, 0, 0, .0) !important;
+    backdrop-filter: blur(50px) !important;
+    z-index: -1 !important;
+}
+
+.logonav {
+    font-size: 2rem !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+}
+
+.navbarnav a {
+    font-size: 1.15rem !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    margin-left: 2.5rem !important;
+}
+
+#checknav {
+    display: none !important;
+}
+
+.iconsnav {
+    font-size: 2.8rem !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    display: none !important;
+    position: absolute !important;
+    right: 0 !important;
+}
+
+@media(max-width: 992px) {
+    .headernav {
+        padding: 1.3rem 5% !important;
+    }
+}
+
+@media(max-width: 768px) {
+    .iconsnav {
+        display: inline-flex !important;
+    }
+    #checknav:checked~.iconsnav #menu-icon {
+        display: none;
+    }
+    #checknav:checked~.iconsnav #close-icon {
+        display: block !important;
+    }
+    .iconsnav #close-icon {
+        display: none !important;
+    }
+    .navbarnav {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 0;
+        background-color: rgba(0, 0, 0, .0) !important;
+        backdrop-filter: blur(50px) !important;
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1) !important;
+        -webkit-transition: .3 ease;
+        -moz-transition: .3 ease;
+        -ms-transition: .3 ease;
+        -o-transition: .3 ease;
+        transition: .3 ease;
+        overflow: hidden;
+    }
+    #checknav:checked~.navbarnav {
+        height: 17.7rem;
+    }
+    .showshow {
+        background-color: rgba(0, 0, 0, .0) !important;
+        backdrop-filter: blur(50px) !important;
+    }
+    .navbarnav a {
+        display: block !important;
+        font-size: 1.1rem !important;
+        margin: 1.5rem 0 !important;
+        text-align: center !important;
+        -webkit-transform: translateY(-50px);
+        -moz-transform: translateY(-50px);
+        -ms-transform: translateY(-50px);
+        -o-transform: translateY(-50px);
+        transform: translateY(-50px);
+        -webkit-transition: .3 ease;
+        -moz-transition: .3 ease;
+        -ms-transition: .3 ease;
+        -o-transition: .3 ease;
+        transition: .3 ease;
+    }
+    #checknav:checked~.navbarnav a {
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0);
+        transition-delay: calc(.15s * var(--1));
+    }
+    .logonav {
+        font-size: 2rem !important;
+        color: #fff;
+        font-weight: 700;
+        transition-delay: calc(.15s * var(--1)) !important;
+    }
+}
+
+.aboutimg {
+    width: 13rem;
+}
+
+.flexflex {
+    justify-content: center;
+    align-items: center;
+}

@@ -16,10 +16,11 @@ login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
 
-
-
 migrate = Migrate(app, db)
 
 
 from jrlabel.models import Post, User
 from jrlabel import routes
+
+with app.app_context():
+    db.create_all()

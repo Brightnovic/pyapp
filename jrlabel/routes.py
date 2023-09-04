@@ -21,51 +21,45 @@ from flask import render_template, url_for, flash, redirect, request
 
  
 
-
-
-
-
-@app.route('/reset-database', methods=['GET'])
-def reset_database():
-    # Drop all tables
-    db.drop_all()
-
-    # Recreate all tables
-    db.create_all()
-
-    return "Database reset complete"
-
-
-
-
 def save_picture_blog(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
-    picture_path = os.path.join(current_app.root_path, 'static/profile_pics', picture_fn)
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
     form_picture.save(picture_path)
 
+    return picture_fn
+
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+
+    output_size = (125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_fn
+
+
+
+
+
+
+
+ 
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/home",methods=['GET', 'POST'])
 def home():
-    post = None
     form = ArticleForm1()
-    if form.validate_on_submit():
-        img_file = save_picture_blog(form.image_file.data)
-        
-        
-        post = Article(img_file=img_file, title=form.h2_text.data, content=form.p_text.data)
-        print(post)
-        db.session.add(post)
-        db.session.commit()
-        
-        flash('Update successful', 'success')
-        return redirect(url_for('home'))
+    return render_template('index.html',title="home page")
     
  
 
-    return render_template('index.html' , form=form,post= post )
+    
 
 
 
@@ -75,14 +69,14 @@ def home():
 
 @app.route("/about")
 def about():
-    return render_template('about.html')
+    return render_template('about.html',title="about us")
 
 
 
 
 @app.route("/Careers")
 def Careers():
-    return render_template('Careers.html')
+    return render_template('Careers.html',title="jobs")
 
 
 
@@ -101,7 +95,7 @@ def Careers():
 
 @app.route("/service")
 def service():
-    return render_template('service.html')
+    return render_template('service.html',title="our services")
 
 
 
@@ -111,8 +105,14 @@ def service():
 
 @app.route("/contact")
 def contact():
-    return render_template('contact.html')
+    return render_template('contact.html',title="contact us")
 
+
+
+
+
+
+ 
 
 
 
@@ -124,18 +124,18 @@ def edithomepage():
     form = ArticleForm1()
      
     if form.validate_on_submit():
-        img_file = save_picture_blog(form.image_file.data)
+
+        image_home = save_picture_blog(form.image_home.data)
         
         # Create a new Article object and populate its attributes
-        post = Article(img_fil=img_file, title=form.h2_text.data, content=form.p_text.data)
+        post = Article(image_home = image_home, title = form.title.data, description = form.description.data)
         
         db.session.add(post)
         db.session.commit()
         
         flash('Update successful', 'success')
-        return redirect(url_for('home'))
-    
-    return render_template('edithomepage.html', form=form)
+        return redirect(url_for('home',  post = post , image_home = image_home))
+    return render_template('index.html', form=form)
 
 
 
@@ -183,15 +183,6 @@ def register():
 
 
 
-def save_picture(form_picture):
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
-    form_picture.save(picture_path)
-
-    return picture_fn
-
 
 
 
@@ -206,7 +197,7 @@ def account():
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file
+            current_user.image_file_user = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
@@ -215,8 +206,8 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('account.html', title='Account',
+    image_file = url_for('static', filename='profile_pics/' + current_user.image_file_user)
+    return render_template('account.html', title='edit Account info',
                            image_file=image_file, form=form)
 
 
@@ -240,38 +231,41 @@ def login():
 #blog
 @app.route("/blog")
 def blog():
-    post = Post.query.order_by(Post.date_posted.desc()).all()
+    page = request.args.get('page', 1, type=int)
+    post = Post.query.order_by(Post.date_posted.desc()).paginate(page = page ,per_page=2)
      
-    image_fileblog = url_for('static', filename='profile_pics/' + current_user.image_file)
-    image = url_for('static', filename='profile_pics/' + Post.image_file)
-    return render_template('blog.html', post=post, admin=image_fileblog , image=image)
-#blog
+    #image_file_blog = url_for('static', filename='profile_pics/' + current_user.image_file_user)
+
+    return render_template('blog.html', post=post,title="blog page")
 
 
 
 
 
 
-    return picture_fn
+
+     
 #blog function
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def blogpost():
     form = PostForm()
     if form.validate_on_submit():
-        if form.image_file.data:   
-            image_file = save_picture_blog(form.image_file.data)  
+        if form.image_file_blog.data:   
+             
+            image_file_blog = save_picture_blog(form.image_file_blog.data)  
             post = Post(title=form.title.data,
-                         image_file=image_file, 
+                         image_file_blog=image_file_blog, 
                         content=form.content.data, 
-                        author=current_user)
+                        author=current_user,
+                        text=form.text.data)
             db.session.add(post)
             db.session.commit()
             flash('Your blog post has been created!', 'success')
-            return redirect(url_for('blog', title='upload blog'))  # Redirect to the blog page
+            return redirect(url_for('blog'))  # Redirect to the blog page
         else:
             flash('Image is required for a blog post', 'danger')
-    return render_template('blogpost.html', title='New Post', form=form, legend='New Post')
+    return render_template('blogpost.html', title='create  New Post', form=form, legend='New Post' )
 
 
 
@@ -281,8 +275,8 @@ def blogpost():
  
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    image_fileblog = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('updateblog.html', title=post.title, post=post,admin=image_fileblog )
+    #image_fileblog = url_for('static', filename='profile_pics/' + current_user.image_file_user)
+    return render_template('updateblog.html', title=post.title, post=post )
 
 
 
@@ -300,3 +294,18 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('blog'))
+
+
+
+
+@app.errorhandler(404)
+def error404_page(error):
+    return render_template('404.html',title='page not found!')
+
+
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html', title="HTTP Version Not Supported")

@@ -3,66 +3,107 @@
 
  
   
-  
- <section id=" " >
+{% if current_user.is_authenticated %}
+<section id=" " >
  
   
-    <div class="  d-flex justify-content-evenly    flex-lg-wrap flex-sm-wrap mx-auto  ">
+  <div class="  d-flex justify-content-evenly    flex-lg-wrap flex-sm-wrap mx-auto  ">
+      
+  
+
+
+      <div class="image-container blogw">
         
-    
-
-
-        <div class="image-container blogw">
-          
-                <p class="text-white">
-                    <img class="rounded-circle account-imgblog" src="{{admin}}">
-                    Posted by    {{ current_user.username }}  
-                    
-                </p>
+              <p class="text-white">
+                  <img class="rounded-circle account-imgblog" src="{{admin}}">
+                  Posted by    {{ current_user.username }}  
+                  
+              </p>
+         
+       <div class="image fit">
+          <a href="#"><img src="{{ url_for('static', filename='profile_pics/' + post.image_file_blog) }}" alt="" /></a>
+ 
+       </div>
+       <div class="overlay">
+            
            
-         <div class="image fit">
-            <a href="#"><img src="{{ url_for('static', filename='profile_pics/' + post.image_file) }}" alt="" /></a>
-   
-         </div>
-         <div class="overlay">
-             <h1>{{ post.title }}</h1>
-             
-             <p>  {{ post.content }}</p>
-             <p><i class="ri-time-line gold">{{post.date_posted.strftime('%Y-%m-%d')}}</i></p>
-         </div>
-        </div>
+           
+           
+       </div>
+      </div>
+      
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          delete
+        </button>
         
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            delete
-          </button>
-          
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Delete post?</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  are you sure you want to delete this post?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
-                    <input class="btn btn-danger" type="submit" value="Delete">
-                  </form>
-                </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete post?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                are you sure you want to delete this post?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                  <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
               </div>
             </div>
           </div>
-
-        
+        </div>
 
       
-</section>
-  
 
+    
+</section>
+    {% else %}
+    <section id=" " >
+ 
+  
+      <div class="  d-flex justify-content-evenly    flex-lg-wrap flex-sm-wrap mx-auto  ">
+          
+      
+  
+  
+          <div class="image-container blogw">
+            
+                 
+             
+           <div class="image fit">
+              <a href="#"><img src="{{ url_for('static', filename='profile_pics/' + post.image_file_blog) }}" alt="" /></a>
+     
+           </div>
+            
+          </div>
+          
+          
+            
+            <!-- Modal -->
+             
+  
+          
+  
+        
+  </section>
+   {% endif %}
+
+ 
+ 
+<div class=" border border-warning py-5 text-white container text-center">
+
+  <h1 class="text-control">{{ post.title }}</h1>
+               
+  <p class="text-control">  {{ post.content }}</p>
+
+   <p><i class="ri-time-line gold">{{post.date_posted.strftime('%Y-%m-%d')}}</i></p>
+   <p>{{post.text}}</p>
+  
+</div>
 
 <!-- Button trigger modal -->
 

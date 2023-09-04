@@ -39,9 +39,9 @@ class LoginForm(FlaskForm):
 
 
 class ArticleForm1(FlaskForm):
-    img_file = FileField('Update Image', validators=[DataRequired() ,FileAllowed(['jpg', 'png'])])
-    p_text = StringField('Paragraph Text', validators=[DataRequired()])
-    h2_text = StringField('Header Text', validators=[DataRequired()])
+    image_home = FileField('image_home', validators=[DataRequired() ,FileAllowed(['jpg', 'png'])])
+    title = StringField('title', validators=[DataRequired()])
+    description = StringField('description ', validators=[DataRequired()])
     submit = SubmitField('Update')
 
 
@@ -105,6 +105,7 @@ class UpdateAccountForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
-    image_file = FileField('Update Image', validators=[DataRequired(), FileAllowed(['jpg', 'png','jpeg'])])
-
+    text = TextAreaField('text', validators=[DataRequired()])
+    image_file_blog = FileField('image_file', validators=[DataRequired(), FileAllowed(['jpg', 'png','jpeg'])])
+    
     submit = SubmitField('Post')

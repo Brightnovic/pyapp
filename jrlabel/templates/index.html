@@ -1,32 +1,63 @@
 
+
 {% extends "layout.html" %}
 {% block content %}
+
  
  
     <section class="banner full">
-        <article>
-            <img src=" " alt="" />
-            <div class="inner">
+        <article class="img-video " >
+    
+    
+            <video autoplay muted  loop id="video-bg">
+                <source src="{{url_for('static', filename='video/ruger.mp4')}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
                 <header>
-                    <p>     </p>
-                    <h2>   </h2>
+                    <img src="{{url_for('static', filename='profile_pics/homevideo.jpg')}}"  alt="" />
+                    
                 </header>
+                <div class="contentanimation">
+                    <div class="content__container">
+                      <p class="content__container__text ">
+                        Don't  
+                      </p>
+                      
+                      <ul class="content__container__list gold">
+                        <li class="content__container__list__item">Hate Song</li>
+                        <li class="content__container__list__item"> Hate a singer</li>
+                        <li class="content__container__list__item">4get to play music</li>
+                        <li class="content__container__list__item"> Listen Alone!</li>
+                      </ul>
+                    </div>
+                  </div>
             </div>
-          
         </article>
         <article>
-            
-            
-            <img src="{{url_for('static', filename='slide02.jpg')}}" alt="" />
+    
+    
+            <img src="{{url_for('static', filename='profile_pics/home5.jpg')}}"  alt="" />
             <div class="inner">
                 <header>
-                    <p>Lorem ipsum dolor sit amet nullam feugiat</p>
-                    <h2>Magna</h2>
+                    <p>Crafting Musical Journeys That Resonate</p>
+                    <h2>Sonic Innovations</h2>
+                    <div  id="animation" class="bg-success">music is life</div>
                 </header>
             </div>
         </article>
         <article>
-            <img src="{{url_for('static', filename='slide03.jpg')}}"  alt="" />
+    
+    
+            <img src="{{url_for('static', filename='profile_pics/home6.jpg')}}"  alt="" />
+            <div class="inner">
+                <header>
+                    <p> Unveiling the Beat of Creativity</p>
+                    <h2>Harmonizing Dreams</h2>
+                </header>
+            </div>
+        </article>
+        <article>
+            <img src="{{url_for('static', filename='profile_pics/home7.jpg')}}"  alt="" />
             <div class="inner">
                 <header>
                     <p>Sed cursus aliuam veroeros lorem ipsum nullam</p>
@@ -35,24 +66,43 @@
             </div>
         </article>
         <article>
-            <img src="{{url_for('static', filename='slide04.jpg')}}"  alt="" />
+            <img src="{{url_for('static', filename='profile_pics/home3.jpg')}}"  alt="" />
             <div class="inner">
                 <header>
-                    <p>Adipiscing lorem ipsum feugiat sed phasellus consequat</p>
-                    <h2>Etiam</h2>
+                    <p>Where Passion Meets Sound</p>
+                    <h2 class="goldhome">Music Redefined</h2>
                 </header>
             </div>
         </article>
-        <article>
-            <img src="images/slide05.jpg"  alt="" />
+        <article class="img-video">
+            <img src="{{url_for('static', filename='profile_pics/home1.jpg')}} "  alt="" />
             <div class="inner">
                 <header>
-                    <p>Ipsum dolor sed magna veroeros lorem ipsum</p>
-                    <h2>Adipiscing</h2>
+                    <p> Captivating Hearts Through Notes</p>
+                    <h2>Tunes That Move</h2>
                 </header>
             </div>
         </article>
+        <article class="img-video " >
+    
+    
+            <video autoplay muted  loop id="video-bg">
+                <source src="{{url_for('static', filename='video/ruger.mp4')}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+                <header>
+                    <img src="{{url_for('static', filename='profile_pics/homevideo.jpg')}}"  alt="" />
+                    
+                </header>
+                
+            </div>
+        </article>
+ 
     </section>
 
-    
+ 
 {% endblock content %}
+
+
+
+
